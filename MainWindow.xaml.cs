@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics; // Debug.Assert
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -55,13 +56,55 @@ namespace Lab2
             TextBox expr = this.FindName("Expr") as TextBox;
             if (expr == null)
                 return;
+            Debug.Assert(expr.Text.Length >= 1);
             if (expr.Text.Length == 1)
             {
                 expr.Text = "0";
             }
             else
             {
-                expr.Text = expr.Text.Substring(0, expr.Text.Length - 1);
+                // Проверяем что было введено последним: цифра или операция. Операция всегда находится в промежутке между пробелами.
+                if(expr.Text[expr.Text.Length-1] == ' ')
+                { 
+                    expr.Text = expr.Text.Substring(0, expr.Text.Length - 3);
+                }
+                else
+                {
+                    expr.Text = expr.Text.Substring(0, expr.Text.Length - 1);
+                }
+            }
+        }
+
+        private void OperationButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button but = sender as Button;
+            if (but == null)
+                return;
+            TextBox expr = this.FindName("Expr") as TextBox;
+            if (expr == null)
+                return;
+            Debug.Assert(expr.Text.Length >= 1);
+            // Если последним введённым символом была комманда, то новую комманду не добавляем.
+            if (expr.Text[expr.Text.Length - 1] != ' ')
+            {
+                String oper = but.Name.Substring(but.Name.Length - 3);
+                switch (oper)
+                {
+                    case "add":
+                        expr.Text += " + ";
+                        break;
+                    case "sub":
+                        expr.Text += " - ";
+                        break;
+                    case "mul":
+                        expr.Text += " * ";
+                        break;
+                    case "div":
+                        expr.Text += " / ";
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
