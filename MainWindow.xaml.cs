@@ -122,6 +122,7 @@ namespace Lab2
                 return;
             String result = Parse(expr.Text);
             hist.Text += expr.Text + " = " + result + "\n";
+            hist.ScrollToEnd();
             expr.Text = result;
         }
 
