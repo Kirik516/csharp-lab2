@@ -124,16 +124,42 @@ namespace Lab2
             hist.Text += expr.Text + " = " + result + "\n";
             expr.Text = result;
         }
-        
-        static String Parse(String expr, int pos = 0)
+
+        static String Parse(String expr)
         {
-            String[] tokens = expr.Substring(pos).Split(' ');
-            for (int i = pos; i < tokens.Length; ++i)
+            String[] tokens = expr.Substring(0).Split(' ');
+            UInt32 pos = 0;
+            return ParseSub(tokens, ref pos);
+        }
+        
+        static String ParseSub(String[] tokens, ref UInt32 pos)
+        {
+            Int32 result = Convert.ToInt32(tokens[pos++]);
+            while (pos < tokens.Length)
             {
-                int a = 0;
+                String operation = tokens[pos++];
+                String nextOperation = (pos + 1 < tokens.Length) ? tokens[pos + 1] : "";
+                Int32 operand = ((nextOperation != "*" && nextOperation != "/") && (operation == "+" || operation == "-")) ? Convert.ToInt32(tokens[pos++]) : Convert.ToInt32(ParseSub(tokens, ref pos));
+                switch (operation)
+                { 
+                    case "+":
+                        result += operand;
+                        break;
+                    case "-":
+                        result -= operand;
+                        break;
+                    case "*":
+                        result *= operand;
+                        break;
+                    case "/":
+                        result /= operand;
+                        break;
+                    default:
+                        Debug.Assert(false);
+                        break;
+                }
             }
-            //expr.
-            return "0";
+            return result.ToString();
         }
     }
 }
