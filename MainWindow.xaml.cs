@@ -64,7 +64,7 @@ namespace Lab2
             else
             {
                 // Проверяем что было введено последним: цифра или операция. Операция всегда находится в промежутке между пробелами.
-                if(expr.Text[expr.Text.Length-1] == ' ')
+                if (expr.Text[expr.Text.Length - 1] == ' ')
                 { 
                     expr.Text = expr.Text.Substring(0, expr.Text.Length - 3);
                 }
@@ -110,7 +110,30 @@ namespace Lab2
 
         private void CalculateButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Button but = sender as Button;
+            if (but == null)
+                return;
+            TextBox expr = this.FindName("Expr") as TextBox;
+            TextBox hist = this.FindName("Hist") as TextBox;
+            if (expr == null || hist == null)
+                return;
+            // Запрещаем вычисление если последний введённый символ это операция.
+            if (expr.Text[expr.Text.Length - 1] == ' ')
+                return;
+            String result = Parse(expr.Text);
+            hist.Text += expr.Text + " = " + result + "\n";
+            expr.Text = result;
+        }
+        
+        static String Parse(String expr, int pos = 0)
+        {
+            String[] tokens = expr.Substring(pos).Split(' ');
+            for (int i = pos; i < tokens.Length; ++i)
+            {
+                int a = 0;
+            }
+            //expr.
+            return "0";
         }
     }
 }

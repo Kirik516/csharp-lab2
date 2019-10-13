@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Калькулятор" Height="280" Width="350">
     <Grid Margin="0,0,2,0">
-        <TextBox ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" IsReadOnly="True" Height="76" Margin="10,10,0,0" TextWrapping="Wrap" Text="" AcceptsReturn="True" VerticalAlignment="Top" HorizontalAlignment="Left" Width="315"/>
+        <TextBox Name="Hist" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" IsReadOnly="True" Height="76" Margin="10,10,0,0" TextWrapping="Wrap" Text="" AcceptsReturn="True" VerticalAlignment="Top" HorizontalAlignment="Left" Width="315"/>
         <!-- NoWrap запрещает перенос на след. строку. AcceptsReturn запрещает ввод новой строки. -->
         <TextBox Name="Expr" Margin="10,91,0,0" TextWrapping="NoWrap" AcceptsReturn="False" IsReadOnly="True" Text="0" TextAlignment="Right" Height="23" VerticalAlignment="Top" HorizontalAlignment="Left" Width="315"/>
         <Button Name="But_7" Content="7" HorizontalAlignment="Left" Margin="10,119,0,0" VerticalAlignment="Top" Width="75" Click="NumericButton_Click"/>
